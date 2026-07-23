@@ -8,4 +8,23 @@
     <h1>THIS IS Company B's site loaded in an <code>iframe</code>. (Domain = github.com)</h1>
     <div id="learnosity_assess"></div>
     <script src="https://items.learnosity.com"></script>
+    <script>
+        window.addEventListener('message', (event) => {
+            
+                if (event.data.action === 'doSomething') {
+                    console.log("hello from iframe")
+
+                    window.LearnosityItems.init(event.data.test, {
+                    readyListener: function () {
+                        console.log("INSIDE iframe > Items API has successfully initialized.");
+                    },
+                    errorListener: function (err) {
+                        console.log("INSIDE IFRAME > ERROR!")
+                        console.log(err);
+                    }
+                })
+
+                }
+            });
+    </script>
 </body>
